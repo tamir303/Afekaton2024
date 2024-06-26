@@ -1,0 +1,13 @@
+{
+    "userId": "67890",
+    "subjectsTaught": ["Mathematics", "Physics"],
+    "hourlyRate": 50.0,
+    "bio": "Experienced tutor with a PhD in Mathematics.",
+    "rating": 4.8,
+    "lessonsGivenIds": ["lesson3_id", "lesson4_id"],
+    "availability": [
+      { "day": "Monday", "from": "10:00", "to": "14:00" },
+      { "day": "Wednesday", "from": "12:00", "to": "16:00" }
+    ]
+  }
+  

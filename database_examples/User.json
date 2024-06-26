@@ -1,0 +1,11 @@
+{
+    "userId": "12345",
+    "username": "john_doe",
+    "password": "hashed_password",
+    "email": "john@example.com",
+    "role": "student",
+    "profilePicture": "http://example.com/profile.jpg",
+    "createdAt": "2024-06-26T12:00:00Z",
+    "updatedAt": "2024-06-26T12:00:00Z"
+  }
+  

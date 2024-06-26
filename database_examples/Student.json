@@ -1,0 +1,7 @@
+{
+    "userId": "12345",
+    "preferredSubjects": ["Mathematics", "Physics"],
+    "bookedLessonsIds": ["lesson1_id", "lesson2"],
+    "reviewsIds": ["review1_id", "review2_id"]
+  }
+  
