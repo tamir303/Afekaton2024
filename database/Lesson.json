@@ -1,0 +1,12 @@
+{
+    "lessonId": "lesson1_id",
+    "studentId": "12345",
+    "tutorId": "67890",
+    "subject": "Mathematics",
+    "date": "2024-07-01",
+    "time": "14:00",
+    "duration": 2,
+    "status": "booked",
+    "price": 100.0
+  }
+  
