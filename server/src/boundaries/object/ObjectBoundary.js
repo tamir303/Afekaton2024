@@ -10,7 +10,7 @@ class ObjectBoundary {
   /**
    * Create a ObjectBoundary.
    * @constructor
-   * @param {ObjectIdBoundary} objectId - The ID of the object boundary.
+   * @param {String} objectId - The ID of the object boundary.
    * @param {String} type - The type of the object boundary.
    * @param {String} alias - The alias of the object boundary.
    * @param {Boolean} active - Whether the object boundary is active.
@@ -19,7 +19,7 @@ class ObjectBoundary {
    * @param {Date} modificationTimestamp - The creation timestamp of the object boundary,
    * can be undefined before data base insertion
    * @param {Location} location - The location of the object boundary.
-   * @param {UserIdInvoker} createdBy - The user ID who created the object boundary.
+   * @param {String} createdBy - The user ID who created the object boundary.
    * @param {Object} objectDetails - Details of the object boundary as a JSON object.
    */
   constructor(
