@@ -64,7 +64,7 @@ function Navbar() {
     if (setting === "Logout") {
       dispatch(logedOut());
     } else if (setting === "Profile") {
-      navigate("/profile");
+      navigate("/profile/1");
     }
     handleCloseUserMenu();
   };
