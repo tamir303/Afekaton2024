@@ -18,7 +18,6 @@ class ObjectBoundary {
    * can be undefined before data base insertion
    * @param {Date} modificationTimestamp - The creation timestamp of the object boundary,
    * can be undefined before data base insertion
-   * @param {Location} location - The location of the object boundary.
    * @param {UserIdInvoker} createdBy - The user ID who created the object boundary.
    * @param {Object} objectDetails - Details of the object boundary as a JSON object.
    */
@@ -29,7 +28,6 @@ class ObjectBoundary {
     active,
     creationTimestamp,
     modificationTimestamp,
-    location,
     createdBy,
     objectDetails
   ) {
@@ -68,12 +66,6 @@ class ObjectBoundary {
      * @type {Date}
      */
     this.modificationTimestamp = modificationTimestamp;
-
-    /**
-     * The location of the object boundary.
-     * @type {Location}
-     */
-    this.location = location;
 
     /**
      * The user ID who created the object boundary.
