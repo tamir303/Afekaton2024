@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { Grid, Typography, TextField, Button, Divider, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const CreatePostPage = ({ subjects }) => {
+const CreatePostPage = ({ myPosts, subjects }) => {
     const [subject, setSubject] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -25,8 +25,11 @@ const CreatePostPage = ({ subjects }) => {
         console.log({ subject, title, content }); // Example action: log form data to console
 
         //TODO: axios call to post data to server
+        myPosts.push({ subject, title, content }); // Example action: add new post to myPosts
 
-        navigate('/posts'); // Redirect to /posts after form submission
+        console.log(myPosts);
+
+        navigate('/home/student'); // Redirect to posts page
     };
 
     return (

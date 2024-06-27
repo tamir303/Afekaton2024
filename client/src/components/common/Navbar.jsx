@@ -24,6 +24,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const role = "student"; // Adjust the role
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,7 +46,7 @@ function Navbar() {
     let targetNavPath = "";
     switch (page) {
       case "Home":
-        targetNavPath = "/home";
+        targetNavPath = `/home/${role}`;
         break;
       case "About":
         targetNavPath = "/about";
@@ -64,7 +65,7 @@ function Navbar() {
     if (setting === "Logout") {
       dispatch(logedOut());
     } else if (setting === "Profile") {
-      navigate("/profile/1");
+      navigate(`/profile/${role}/1`);
     }
     handleCloseUserMenu();
   };
