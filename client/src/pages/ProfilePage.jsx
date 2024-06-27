@@ -20,7 +20,7 @@ const ProfilePage = () => {
     {
       subject: "Math",
       description: "Need help with calculus",
-      location: "Tel Aviv",
+      location: "Tel Aviv, Israel",
     },
   ];
 
