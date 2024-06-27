@@ -1,0 +1,4 @@
+[submodule "ApartMate"]
+	path = ApartMate
+	url = https://github.com/DorFerenc/ApartMate
+	branch = master

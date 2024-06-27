@@ -1,0 +1,47 @@
+POST http://localhost:8083/superapp/users
+Content-Type: application/json
+
+{
+    "email": "miniKINGminiKINGminiKING@demogmail.com",
+    "role": "MINIAPP_USER",
+    "username": "mini King",
+    "avatar": "https://static.thcdn.com/images/large/original/productimg/1600/1600/13733771-1754981942831425.jpg"
+}
+
+###
+
+POST http://localhost:8083/superapp/users
+Content-Type: application/json
+
+{
+    "email": "superKINGsuperKINGsuperKING@demogmail.com",
+    "role": "SUPERAPP_USER",
+    "username": "super King",
+    "avatar": "https://static.thcdn.com/images/large/original/productimg/1600/1600/13733771-1754981942831425.jpg"
+}
+
+###
+
+POST http://localhost:8083/superapp/objects
+Content-Type: application/json
+
+{
+  "type": "dummyType",
+  "alias": "chat Engine",
+  "active": true,
+  "creationTimestamp": "2023-03-11T11:14:23.152+0000",
+  "location": {
+    "lat": 32.1133,
+    "lng": 34.818
+  },
+  "createdBy": {
+    "userId": {
+      "superapp": "2023b.dor.ferenc",
+      "email": "superKINGsuperKINGsuperKING@demogmail.com"
+    }
+  },
+  "objectDetails": {
+    "key1": "init Chat client to have an object",
+    "key2": "after doing this copy the internalObjectId to the .env file"
+  }
+}
