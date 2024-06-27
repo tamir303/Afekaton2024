@@ -12,28 +12,24 @@ import {
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
+import user from "../user"; // Ensure this path matches the location of your user object
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  
-  const user = {
-    username: "Name",
-    email: "name.email@example.com",
-    profilePicture: null,
-    role: "student", // Example role, adjust as necessary
-    userDetails: {
-      subjects: ["Math", "Physics", "Chemistry"],
-      typeRole: "",
-      reviews: [ // Mock reviews data
-        { id: 1, reviewer: "Alice", rating: 5, comment: "Great tutor, very helpful!" },
-        { id: 2, reviewer: "Bob", rating: 4, comment: "Explains concepts clearly." },
-        { id: 3, reviewer: "Charlie", rating: 5, comment: "Excellent sessions, highly recommend." }
-      ]
+  const globPosts = [
+    {
+      subject: "Math",
+      description: "Need help with calculus",
+      location: "Tel Aviv",
     },
-  };
+  ];
 
   const handleSubjectClick = (subject) => {
-    navigate(`/tutors/${subject}`, { state: { subject } });
+    if (user.role === "student") {
+      navigate(`/tutors/${subject}`, { state: { subject } });
+    } else {
+      navigate(`/students/${subject}`, { state: { subject } });
+    }
   };
 
   const handleFileChange = (event) => {
@@ -69,7 +65,7 @@ const ProfilePage = () => {
               component="span"
               onClick={() => document.getElementById("file-input").click()}
             >
-              Files to the decanate
+              Upload Document
             </Button>
           </Grid>
         </Grid>
@@ -117,18 +113,72 @@ const ProfilePage = () => {
             </Box>
           </Paper>
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
-            <Typography variant="h5">Reviews</Typography>
+            <Typography variant="h5">Requests</Typography>
             <List>
-              {user.userDetails.reviews.map((review) => (
-                <ListItem key={review.id} alignItems="flex-start">
+              {user.userDetails.requests.map((req, index) => (
+                <ListItem key={index} alignItems="flex-start">
                   <ListItemAvatar>
                     <Avatar>
                       <StarIcon />
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={`${review.reviewer} (${review.rating} stars)`}
-                    secondary={review.comment}
+                    primary={req.subject}
+                    secondary={
+                      <>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          {req.description}
+                        </Typography>
+                        <br />
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          {req.location}
+                        </Typography>
+                      </>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </Paper>
+          <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
+            <Typography variant="h5">Global Posts</Typography>
+            <List>
+              {globPosts.map((post, index) => (
+                <ListItem key={index} alignItems="flex-start">
+                  <ListItemAvatar>
+                    <Avatar>
+                      <StarIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={post.subject}
+                    secondary={
+                      <>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          {post.description}
+                        </Typography>
+                        <br />
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          {post.location}
+                        </Typography>
+                      </>
+                    }
                   />
                 </ListItem>
               ))}

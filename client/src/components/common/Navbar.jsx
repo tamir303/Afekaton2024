@@ -17,14 +17,23 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
 const pages = ["Home", "About", "Contact Us"];
-const settings = ["Profile", "Logout"];
+const settings = ["Logout"];
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const role = "student"; // Adjust the role
+  const user = {
+    userId: "1",
+    username: "Name",
+    email: "mail@domain.com",
+    role: "student", // Example role, adjust as necessary
+    userDetails: {
+      subjects: ["Math", "Physics", "Chemistry"],
+      typeRole: "",
+    }
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -46,7 +55,7 @@ function Navbar() {
     let targetNavPath = "";
     switch (page) {
       case "Home":
-        targetNavPath = `/home/${role}`;
+        targetNavPath = `/profile/${user.userId}`;
         break;
       case "About":
         targetNavPath = "/about";
@@ -65,7 +74,7 @@ function Navbar() {
     if (setting === "Logout") {
       dispatch(logedOut());
     } else if (setting === "Profile") {
-      navigate(`/profile/${role}/1`);
+      navigate(`/profile/${user.userId}`);
     }
     handleCloseUserMenu();
   };
@@ -85,7 +94,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="home"
+            href={`profile/${user.userId}`}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
