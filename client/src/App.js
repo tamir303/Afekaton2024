@@ -20,11 +20,10 @@ function App() {
       {/* <CssBaseline /> */}
       <Navbar />
       <Routes>
-        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<div>Login</div>} />
         <Route path="/register" element={<div>Register</div>} />
-        <Route path="/search-tutor" element={<SearchTutorPage/>} />
-        <Route path="/tutor/:id" element={<div>Tutor Profile</div>} />
+        <Route path="/tutors/:subject" element={<SearchTutorPage/>} />
+        <Route path="profile/:id" element={<div> Profile</div>} />
         <Route path="/create-post" element={<CreatePostPage subjects={["Math", "Science"]} role="tutor" />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>
