@@ -11,7 +11,7 @@ const StudentProfilePage = () => {
   };
 
   const handleSubjectClick = (subject) => {
-    navigate(`/tutors?subject=${subject}`);
+    navigate(`/tutors/${subject}`);
   };
 
   return (
