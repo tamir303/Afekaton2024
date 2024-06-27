@@ -1,0 +1,45 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dayjs": "^1.11.11",
+    "dotenv-flow": "^4.0.0",
+    "express": "^4.18.2",
+    "gridfs-stream": "^1.1.1",
+    "helmet": "^7.0.0",
+    "http-errors": "^2.0.0",
+    "jsonwebtoken": "^9.0.1",
+    "mongoose": "8.3.3",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.13",
+    "strftime": "^0.10.2",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^5.0.0"
+  },
+  "name": "experiment_collector_server",
+  "description": "An implementation to the collector system server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test PORT=0 DB_NAME=CollectorTestDB mocha --recursive --exit",
+    "dev": "cross-env NODE_ENV=dev DB_NAME=CollectorDevDB nodemon src/app.js",
+    "prod": "cross-env NODE_ENV=prod DB_NAME=CollectorProdDB node src/app.js",
+    "test_docker": "cross-env NODE_ENV=test PORT=0 MONGO_HOST_TYPE=mongo-db DB_NAME=CollectorTestDB mocha --recursive --exit",
+    "dev_docker": "cross-env NODE_ENV=dev MONGO_HOST_TYPE=mongo-db DB_NAME=CollectorDevDB nodemon src/app.js",
+    "prod_docker": "cross-env NODE_ENV=prod MONGO_HOST_TYPE=mongo-db DB_NAME=CollectorProdDB node src/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "chai-http": "^4.4.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "mocha": "^10.2.0"
+  }
+}
