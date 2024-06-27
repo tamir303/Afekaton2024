@@ -7,13 +7,13 @@ const Roles = {
    * Represents the 'student' role.
    * @type {string}
    */
-  student: "student",
+  STUDENT: "student",
 
   /**
    * Represents the 'tutor' role.
    * @type {string}
    */
-  tutor: "tutor",
+  TUTOR: "tutor",
 };
 
 /**
