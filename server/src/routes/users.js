@@ -1,5 +1,5 @@
 import express from "express";
-import researchersController from "../controllers/researchersController.js";
+import EntryController from "../controllers/entryController.js";
 import UserBoundary from "../boundaries/user/UserBoundary.js";
 
 const router = express.Router();
