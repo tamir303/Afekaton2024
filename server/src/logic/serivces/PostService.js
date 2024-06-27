@@ -3,6 +3,7 @@ import UserService from "./UsersService.js"
 import UserBoundary from "../../boundaries/user/UserBoundary.js";
 import UserConverter from "../converters/UserConverter.js";
 import CommandConverter from "../converters/CommandConverter.js";
+import Roles from "../../utils/UserRole.js";
 
 const PostService = {
     informRelatedProducers: async (commandModel: Promise<CommandModel>) => {
@@ -19,7 +20,8 @@ const PostService = {
                 .filter(user => {
                     const userSubjects = user.userDetails.get("subjects");
                     // Check if any subject in the commandModel is included in the user's subjects
-                    return subjects.some(subject => userSubjects.includes(subject));
+                    return subjects.some(subject => userSubjects.includes(subject))
+                        && user.role !== Roles.regular;
                 })
             );
 

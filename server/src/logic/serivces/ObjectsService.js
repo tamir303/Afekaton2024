@@ -75,7 +75,9 @@ const objectsService = {
       throw new createHttpError.NotFound("User not found");
     }
 
-    if (reqObjectBoundary.active && existingUser.role === Roles.regular) {
+    if (reqObjectBoundary.active
+        && existingUser.role === Roles.regular
+        && reqObjectBoundary.type === "Post") {
       logger.info("User requesting help");
       await CommandsService.invokeCommand(
           new CommandBoundary({
