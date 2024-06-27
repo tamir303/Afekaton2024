@@ -56,22 +56,9 @@ const commandsService = {
       throw new createHttpError.NotFound("User not found");
     }
 
-    if (existingUser.role === Roles.PARTICIPANT) {
-      logger.error(
-        `User with userId ${
-          reqCommandBoundary.invokedBy.userId.email +
-          "$" +
-          reqCommandBoundary.invokedBy.userId.platform
-        } is not allowed to create commands and excute them`
-      );
-      throw new createHttpError.Forbidden(
-        `The user ${existingUser.username} not allowed to create this request`
-      );
-    }
-
     return commandModel
       .validate()
-      .then(commandHandler.runCommand(commandModel.command))
+      .then(commandHandler.runCommand(commandModel))
       .then(async () => {
         await commandModel.save();
         logger.info(
@@ -186,31 +173,22 @@ const commandsService = {
 };
 
 const commandHandler = {
-  runCommand: async (commandToExec) => {
-    logger.info(`Executing the command ${commandToExec} ...`);
-    switch (commandToExec) {
-      case "ExportToCSV":
-        console.log("Converting objects to csv");
-        break;
-      case "ImportFromCSV":
-        console.log("Converting csv files to objects");
-        break;
-      case "SendDateToDP":
-        console.log("Sending data to DP");
-        break;
-      case "Testing Service":
-        console.log("Just for testing");
+  runCommand: async (commandModel) => {
+    logger.info(`Executing the command ${commandModel.command} ...`);
+    switch (commandModel.command) {
+      case "GetRelatedProducers":
+        console.log("Get all producers with related");
         break;
       default:
         logger.error(
-          `The server is unfamilliar with the comamnd ${commandToExec}`
+          `The server is unfamilliar with the comamnd ${commandModel.command}`
         );
         createHttpError.BadRequest(
-          `The server is unfamilliar with the comamnd ${commandToExec}`
+          `The server is unfamilliar with the comamnd ${commandModel.command}`
         );
         break;
     }
-    logger.info(`Finshed executing the command ${commandToExec}`);
+    logger.info(`Finshed executing the command ${commandModel.command}`);
   },
 };
 

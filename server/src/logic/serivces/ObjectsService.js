@@ -12,7 +12,9 @@ import ObjectModel from "../../models/ObjectModel.js"; // Import ObjectModel for
 import objectConverter from "../converters/ObjectBoundaryConverter.js"; // Import the objectConverter for converting object objects between different formats
 import ObjectBoundary from "../../boundaries/object/ObjectBoundary.js"; // Import ObjectBoundary for defining the structure of object objects
 import createCustomLogger from "../../config/logger.js"; // Import the configured logger for logging user-related activities
-import path from "path"; // Import path for identifying file paths, used for logging purposes
+import CommandsService from "./CommandsService.js";
+import path from "path";
+import CommandBoundary from "../../boundaries/command/CommandBoundary.js"; // Import path for identifying file paths, used for logging purposes
 
 const { Error } = mongoose; // Import the Error class from mongoose for handling database errors
 
@@ -67,22 +69,23 @@ const objectsService = {
     if (!existingUser) {
       logger.error(
         `User with userId ${
-          reqObjectBoundary.createdBy.userId.email +
-          "$" +
-          reqObjectBoundary.createdBy.userId.platform
-        } does not exists`
+          reqObjectBoundary.createdBy.userId.email
+          } does not exists`
       );
       throw new createHttpError.NotFound("User not found");
     }
 
-    if (!reqObjectBoundary.active && existingUser.role === Roles.PARTICIPANT) {
-      logger.warn(
-        `User with userId ${
-          reqObjectBoundary.createdBy.userId.email +
-          "$" +
-          reqObjectBoundary.createdBy.userId.platform
-        } tried to create inactive object`
-      );
+    if (reqObjectBoundary.active && existingUser.role === Roles.regular) {
+      logger.info("User requesting help");
+      await CommandsService.invokeCommand(
+          new CommandBoundary({
+            command: "GetRelatedProducers",
+            targetObject: reqObjectBoundary.objectId,
+            invokedBy: existingUser.userId,
+            commandAttributes: reqObjectBoundary.objectDetails.get("subjects")
+          })
+      )
+
       throw new createHttpError.Forbidden(
         `The user ${existingUser.username} does not allowed to create this kind of objects`
       );

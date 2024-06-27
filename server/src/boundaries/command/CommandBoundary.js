@@ -10,10 +10,10 @@ class CommandBoundary {
    * Create a CommandBoundary.
    * @constructor
    * @param {CommandIdBoundary} commandId - The ID of the command boundary.
-   * @param {string} command - The command string.
-   * @param {ObjectIdInvoker} targetObject - The ID of the target object.
+   * @param {String} command - The command string.
+   * @param {String} targetObject - The ID of the target object.
    * @param {Date} invocationTimestamp - The time when the command was invoked.
-   * @param {UserIdInvoker} invokedBy - The ID of the user who invoked the command.
+   * @param {String} invokedBy - The ID of the user who invoked the command.
    * @param {Object} commandAttributes - The attributes of the command.
    */
   constructor(

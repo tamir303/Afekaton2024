@@ -5,7 +5,6 @@
  */
 
 import mongoose from "mongoose"; // Import Mongoose for interacting with MongoDB
-import UserBoundary from "../../boundaries/user/UserBoundary.js"; // Import UserBoundary for defining user data for the communication layer
 import UserModel from "../../models/UserModel.js"; // Import UserModel for interacting with the user database model
 import userConverter from "../converters/UserConverter.js"; // Import userConverter for converting user data formats
 import createHttpError from "http-errors"; // Import createHttpError for generating HTTP error responses
@@ -278,39 +277,23 @@ const userService = {
    * Gets all users (only accessible to Admins).
    * @async
    * @function
-   * @param {string} userEmail - The email of the user making the request.
-   * @param {string} userPlatform - The platform of the user making the request.
+   * @param {string} userId - The id of the user making the request.
    * @returns {Promise<UserModel[]>} An array of user models.
    * @throws {Error} Throws an error if the request encounters any issues.
    */
-  getAllUsers: async (userEmail, userPlatform) => {
+  getAllUsers: async (userId) => {
     const existingUserModel = await UserModel.findOne({
-      userId: userEmail + "$" + userPlatform,
+      userId: userId,
     });
 
     if (!existingUserModel) {
       logger.error(
-        `User with userId ${userEmail + "$" + userPlatform} does not exists`
+        `User with userId ${userId} does not exists`
       );
       throw new createHttpError.NotFound("User does not exists");
     }
 
-    if (existingUserModel.role && existingUserModel.role === Roles.ADMIN) {
-      const usersArr = await UserModel.find();
-      logger.info(
-        `User with userId ${existingUserModel.userId} successfully retrieved all users`
-      );
-      return usersArr;
-    } else {
-      logger.error(
-        `User with userId ${
-          userEmail + "$" + userPlatform
-        } tried to retrieve all users without while he is not authorized`
-      );
-      throw new createHttpError.Forbidden(
-        "You are not allowed to make this request"
-      );
-    }
+    return await UserModel.find();
   },
   /**
    * Deletes all users (only accessible to Admins).
