@@ -16,7 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-const pages = ["Edit Experiment", "Participate In Experiment", "Export Data"];
+const pages = ["Home", "About", "Contact Us"];
 const settings = ["Profile", "Logout"];
 
 function Navbar() {
@@ -44,17 +44,16 @@ function Navbar() {
   const handleNavClick = (page) => {
     let targetNavPath = "";
     switch (page) {
-      case "Edit Experiment":
-        targetNavPath = "/editor";
+      case "Home":
+        targetNavPath = "/home";
         break;
-      case "Participate In Experiment":
-        targetNavPath = "/experiment";
+      case "About":
+        targetNavPath = "/about";
         break;
-      case "Export Data":
-        targetNavPath = "/export-data";
+      case "Contact Us":
+        targetNavPath = "/contact-us";
         break;
       default:
-        targetNavPath = "/";
         break;
     }
     navigate(targetNavPath);
@@ -85,7 +84,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
