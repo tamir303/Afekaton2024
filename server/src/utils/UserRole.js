@@ -4,22 +4,16 @@
  */
 const Roles = {
   /**
-   * Represents the 'Admin' role.
+   * Represents the 'student' role.
    * @type {string}
    */
-  ADMIN: "Admin",
+  student: "student",
 
   /**
-   * Represents the 'Participant' role.
+   * Represents the 'tutor' role.
    * @type {string}
    */
-  PARTICIPANT: "Participant",
-
-  /**
-   * Represents the 'Researcher' role.
-   * @type {string}
-   */
-  RESEARCHER: "Researcher",
+  tutor: "tutor",
 };
 
 /**
