@@ -5,9 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store, { persistor } from "./states/store.ts";
+import store, { persistor } from "./states/store"
 import { PersistGate } from "redux-persist/integration/react";
-import { AlertProvider } from "../src/components/common/AlertProvider.tsx";
+import { AlertProvider } from "./components/common/AlertProvider.jsx"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
