@@ -20,7 +20,7 @@ const ProfilePage = () => {
     username: "Name",
     email: "name.email@example.com",
     profilePicture: null,
-    role: "tutor", // Example role, adjust as necessary
+    role: "student", // Example role, adjust as necessary
     userDetails: {
       subjects: ["Math", "Physics", "Chemistry"],
       typeRole: "",

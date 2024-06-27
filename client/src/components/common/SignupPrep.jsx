@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom"; // Import useParams
 
 const SignupPrep = () => {
   const { type } = useParams(); // Retrieve the 'type' parameter from the route
+  const { role } = useParams(); // Retrieve the 'role' parameter from the route
   const navigate = useNavigate();
   let fields = [];
   let validation = {};
@@ -41,7 +42,6 @@ const SignupPrep = () => {
       break;
   }
 
-  const role = userRoles[type] || userRoles.Researcher; // Default to Researcher if type is undefined or unknown
   const platform = "Builder";
 
   onSubmit = async (values) => {
@@ -88,6 +88,7 @@ const SignupPrep = () => {
         fields={fields}
         validation={validation}
         onSubmit={onSubmit}
+        role={role} // Pass the 'role' as role
         typeOfUser={type} // Pass the 'type' as typeOfUser
       />
     </>
