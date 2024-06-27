@@ -13,7 +13,8 @@ import CommandBoundary from "../../boundaries/command/CommandBoundary.js"; // Im
 import CommandModel from "../../models/CommandModel.js"; // Importing the Command Model
 import commandConverter from "../converters/CommandConverter.js"; // Importing the Command Converter for data conversion
 import createCustomLogger from "../../config/logger.js"; // Import the configured logger for logging user-related activities
-import path from "path"; // Import path for identifying file paths, used for logging purposes
+import path from "path"; // Import path for identifying file paths, used for logging purpos// es
+import PostService from "./PostService.js";
 
 const { Error } = mongoose; // Import the Error class from mongoose for handling database errors
 
@@ -178,6 +179,7 @@ const commandHandler = {
     switch (commandModel.command) {
       case "GetRelatedProducers":
         console.log("Get all producers with related");
+        await PostService.informRelatedProducers(commandModel)
         break;
       default:
         logger.error(

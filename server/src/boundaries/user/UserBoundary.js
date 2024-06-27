@@ -1,4 +1,5 @@
-import UserIdBoundary from "./UserIdBoundary.js";
+import { v4 as uuidv4 } from 'uuid';
+
 /**
  * Represents a UserBoundary object of the Collector's users.
  * @class
@@ -7,18 +8,20 @@ class UserBoundary {
   /**
    * Create a UserBoundary.
    * @constructor
-   * @param {string} platform - The platform that user uses
-   * @param {string} email - The email that belongs to the user
+   * @parma {string} userId - The id of the user
+   * @param {string} email - The email of that user
    * @param {string} role - The role of the user.
    * @param {string} username - The username of the user.
    * @param {Object} userDetails - Additional data about the user.
    */
-  constructor(platform, email, role, username, userDetails) {
+  constructor(email, role, username, userDetails) {
+    this.userId = uuidv4();
+
     /**
      * The UserIdBoundary instance of the user.
-     * @type {UserIdBoundary}
+     * @type {String}
      */
-    this.userId = new UserIdBoundary(platform, email);
+    this.email = email
 
     /**
      * The role of the user.

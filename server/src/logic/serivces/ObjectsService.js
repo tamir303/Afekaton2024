@@ -50,8 +50,6 @@ const objectsService = {
       !reqObjectBoundary.type ||
       !reqObjectBoundary.active === undefined ||
       !reqObjectBoundary.createdBy ||
-      !reqObjectBoundary.createdBy.userId.platform ||
-      !reqObjectBoundary.createdBy.userId.email ||
       !reqObjectBoundary.objectDetails
     ) {
       logger.error("Some of the objects properties are undefined");
@@ -69,14 +67,14 @@ const objectsService = {
     if (!existingUser) {
       logger.error(
         `User with userId ${
-          reqObjectBoundary.createdBy.userId.email
+          reqObjectBoundary.createdBy.userId
           } does not exists`
       );
       throw new createHttpError.NotFound("User not found");
     }
 
     if (reqObjectBoundary.active
-        && existingUser.role === Roles.regular
+        && existingUser.role === Roles.STUDENT
         && reqObjectBoundary.type === "Post") {
       logger.info("User requesting help");
       await CommandsService.invokeCommand(

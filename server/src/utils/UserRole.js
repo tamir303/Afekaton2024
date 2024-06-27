@@ -7,31 +7,13 @@ const Roles = {
    * Represents the 'smartUpStudent' role.
    * @type {string}
    */
-  smartUpStudent: "smartUpStudent",
+  STUDENT: "student",
 
   /**
    * Represents the 'studentOver80' role.
    * @type {string}
    */
-  studentOver80: "studentOver80",
-
-  /**
-   * Represents the 'gradStudent' role.
-   * @type {string}
-   */
-  gradStudent: "gradStudent",
-
-  /**
-   * Represents the 'external' role.
-   * @type {string}
-   */
-  external: "external",
-
-  /**
-   * Represents the 'regular' role.
-   * @type {string}
-   */
-  regular: "regular",
+  TUTOR: "tutor",
 };
 
 /**

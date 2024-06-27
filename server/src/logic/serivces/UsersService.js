@@ -40,8 +40,8 @@ const userService = {
    */
   createUser: async (reqUserBoundary) => {
     if (
-      !reqUserBoundary.userId.email ||
-      !reqUserBoundary.userId.platform ||
+      !reqUserBoundary.userId ||
+      !reqUserBoundary.email ||
       !reqUserBoundary.role ||
       !reqUserBoundary.username ||
       !reqUserBoundary.userDetails
@@ -281,19 +281,12 @@ const userService = {
    * @returns {Promise<UserModel[]>} An array of user models.
    * @throws {Error} Throws an error if the request encounters any issues.
    */
-  getAllUsers: async (userId) => {
+  getAllUsers: async () => {
     const existingUserModel = await UserModel.findOne({
-      userId: userId,
+      userId: this.userId,
     });
 
-    if (!existingUserModel) {
-      logger.error(
-        `User with userId ${userId} does not exists`
-      );
-      throw new createHttpError.NotFound("User does not exists");
-    }
-
-    return await UserModel.find();
+    return UserModel.find();
   },
   /**
    * Deletes all users (only accessible to Admins).

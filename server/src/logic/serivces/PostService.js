@@ -21,14 +21,14 @@ const PostService = {
                     const userSubjects = user.userDetails.get("subjects");
                     // Check if any subject in the commandModel is included in the user's subjects
                     return subjects.some(subject => userSubjects.includes(subject))
-                        && user.role !== Roles.regular;
+                        && user.role !== Roles.STUDENT;
                 })
             );
 
         // Appending to notifications or creating the array if it doesn't exist
         relatedUsers.forEach(user => {
             const notifications = user.userDetails.get("notifications");
-            const newNotification = user.userId // User requesting help
+            const newNotification = user.u // User requesting help
 
             if (notifications) {
                 notifications.push(newNotification);
@@ -38,3 +38,5 @@ const PostService = {
         });
     }
 }
+
+export default PostService
