@@ -67,7 +67,8 @@ const DB_NAME = process.env.DB_NAME || "test";
  * Retrieved from the environment variables.
  * @type {string}
  */
-export const MONGO_URL = `mongodb://${MONGO_HOST_TYPE}:${MONGO_PORT}/${DB_NAME}`;
+export const MONGO_URL = "mongodb+srv://tamir:D6qvYDHWuo4mCG4l@test.7ql57vq.mongodb.net/?retryWrites=true&w=majority&appName=test"
+// `mongodb://${MONGO_HOST_TYPE}:${MONGO_PORT}/${DB_NAME}`;
 
 // Log the MongoDB connection URL being used
 logger.info(`MongoDB URL: ${MONGO_URL}`);
