@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -8,20 +8,23 @@ import {
   Button,
   Box,
   IconButton,
-} from "@mui/material";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import {
   Avatar,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
 } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import StarIcon from "@mui/icons-material/Star";
+import EditIcon from "@mui/icons-material/Edit";
 import user from "../user"; // Ensure this path matches the location of your user object
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const [editableSubjects, setEditableSubjects] = useState(
+    user.userDetails.subjects
+  );
+  const [randomGreenButtons, setRandomGreenButtons] = useState([]);
   const globPosts = [
     {
       subject: "Math",
@@ -29,6 +32,21 @@ const ProfilePage = () => {
       location: "Tel Aviv, Israel",
     },
   ];
+
+  useEffect(() => {
+    const getRandomIndices = (arr, n) => {
+      const indices = [];
+      while (indices.length < n) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        if (!indices.includes(randomIndex)) {
+          indices.push(randomIndex);
+        }
+      }
+      return indices;
+    };
+
+    setRandomGreenButtons(getRandomIndices(user.userDetails.subjects, 3));
+  }, []);
 
   const handleSubjectClick = (subject) => {
     if (user.role === "student") {
@@ -41,6 +59,19 @@ const ProfilePage = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     console.log(file);
+  };
+
+  const handleEditSubjects = () => {
+    const newSubject = prompt("Enter a new subject to add:");
+    if (newSubject) {
+      setEditableSubjects((prevSubjects) => [...prevSubjects, newSubject]);
+    }
+  };
+
+  const handleRemoveSubject = (subjectToRemove) => {
+    setEditableSubjects((prevSubjects) =>
+      prevSubjects.filter((subject) => subject !== subjectToRemove)
+    );
   };
 
   return (
@@ -103,19 +134,38 @@ const ProfilePage = () => {
       ) : (
         <>
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
-            <Typography variant="h5">Subjects I Can Teach</Typography>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography variant="h5">Subjects I Can Teach</Typography>
+              <IconButton color="primary" onClick={handleEditSubjects}>
+                <EditIcon />
+              </IconButton>
+            </Box>
             <Box mt={2}>
               <Grid container spacing={2}>
-                {user.userDetails.subjects.map((subject, index) => (
+                {editableSubjects.map((subject, index) => (
                   <Grid item key={index}>
                     <Button
-                    disabled
                       variant="contained"
-                      color="primary"
+                      color={
+                        randomGreenButtons.includes(index)
+                          ? "success"
+                          : "primary"
+                      }
                       style={{ minWidth: "100px", minHeight: "100px" }}
                       onClick={() => handleSubjectClick(subject)}
                     >
                       {subject}
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={() => handleRemoveSubject(subject)}
+                      >
+                        X
+                      </IconButton>
                     </Button>
                   </Grid>
                 ))}

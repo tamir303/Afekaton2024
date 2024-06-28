@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/common/Navbar";
 import LoginPage from "./pages/LoginPage";
+import SignupPrep from "./components/common/SignupPrep";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -20,7 +21,6 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
-        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register/:role/:type" element={<SignupPrep />} />
         <Route path="/tutors/:subject" element={<SearchTutorPage />} />
