@@ -98,7 +98,7 @@ const SignupPrep = () => {
           `The user ${savedUser.email} has been registered successfully!`
         );
       }
-      navigate(`/login/${role}`);
+      navigate(`/login`);
     } catch (error) {
       console.error(`Encountered error for Registering ${type}:`, error);
     }

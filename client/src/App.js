@@ -14,6 +14,8 @@ import LoginPage from "./pages/LoginPage";
 import SignupPrep from "./components/common/SignupPrep";
 import ContactUsPage from "./pages/ContactUsPage";
 import AboutPage from "./pages/AboutPage";
+import ChatApp from "./pages/app"
+import {Navigate} from "react-router-dom";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -25,12 +27,13 @@ function App() {
       <Routes>
         <Route path="/about" element={<AboutPage/>} />
         <Route path="/contact-us" element={<ContactUsPage/>} />
-        <Route path="/login/:role/:type" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/register/:role/:type" element={<SignupPrep />} />
         <Route path="/tutors/:subject" element={<SearchTutorPage />} />
         <Route path="/students/:subject" element={<SearchStudentPage />} />
         <Route path="profile/:id" element={<ProfilePage/>} />
-        <Route path="*" element={<div>404</div>} />
+        <Route path="/app/chat" element={<ChatApp />} />
+        <Route path="/" element={<Navigate to="/about" />} />
       </Routes>
     </ThemeProvider>
   );

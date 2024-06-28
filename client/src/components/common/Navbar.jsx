@@ -13,7 +13,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-
+import { userStudent, userTutor } from "../../user.js";
+import { useParams } from "react-router-dom";
 const pages = ["Home", "About", "Contact Us"];
 const settings = ["Logout"];
 
@@ -21,17 +22,8 @@ function Navbar() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const user = {
-    userId: "1",
-    username: "Name",
-    email: "mail@domain.com",
-    role: "student", // Example role, adjust as necessary
-    userDetails: {
-      subjects: ["Math", "Physics", "Chemistry"],
-      typeRole: "",
-    }
-  };
-
+  const { id } = useParams();
+  const user = id === "dor@gmail.com" ? userTutor : userStudent; // Adjust this line as necessary
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -52,7 +44,7 @@ function Navbar() {
     let targetNavPath = "";
     switch (page) {
       case "Home":
-        targetNavPath = `/profile/${user.userId}`;
+        targetNavPath = `/profile/${user.email}`;
         break;
       case "About":
         targetNavPath = "/about";
@@ -69,9 +61,9 @@ function Navbar() {
 
   const handleUserMenuClick = (setting) => {
     if (setting === "Logout") {
-      navigate("/login/student/regular");
+      navigate("/login");
     } else if (setting === "Profile") {
-      navigate(`/profile/${user.userId}`);
+      navigate(`/profile/${user.email}`);
     }
     handleCloseUserMenu();
   };
@@ -91,7 +83,7 @@ function Navbar() {
             variant="h6"
             noWrap
             component="a"
-            href={`profile/${user.userId}`}
+            href={`profile/${user.email}`}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -100,9 +92,10 @@ function Navbar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              fontSize: "1rem",
             }}
           >
-            LOGO
+            Afektive
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

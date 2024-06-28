@@ -16,7 +16,7 @@ const SearchStudentPage = () => {
   const location = useLocation();
   const subject = location.state.subject;
   const [searchString, setSearchString] = useState("");
-  const {userTutor, userStudent} = require("../user");
+  const { userTutor, userStudent } = require("../user");
   const [students] = useState([userTutor, userStudent]);
 
   const filteredStudents = students.filter(
@@ -37,10 +37,6 @@ const SearchStudentPage = () => {
         <Typography variant="h1">{subject} students</Typography>
         <Divider />
         <br />
-        <br />
-        <Link to="/profile/1" style={{ textDecoration: "none" }}>
-          <Button>Back to profile</Button>
-        </Link>
         <SearchBar
           searchString={searchString}
           setSearchString={setSearchString}
@@ -60,13 +56,17 @@ const SearchStudentPage = () => {
               <CardContent>
                 <Typography variant="h5" component="div">
                   {student.username}
-                </Typography><br/>
+                </Typography>
+                <br />
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Role: {student.role}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  { student.role === "student" || student.role === "studentOver80" ? "Cost 1 token" : "Price X $" }
-                  </Typography>
+                  {student.role === "student" ||
+                  student.role === "studentOver80"
+                    ? "Cost 1 token"
+                    : "Price X $"}
+                </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Subjects:
                 </Typography>
@@ -78,11 +78,8 @@ const SearchStudentPage = () => {
                 ))}
               </CardContent>
               <CardActions>
-                <Link
-                  to={`/tutor/${student.userId}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <Button size="small">Chat</Button>
+                <Link to={'/app/chat'} style={{ textDecoration: "none" }}>
+                  <Button size="small">Chat</Button>{" "}
                 </Link>
               </CardActions>
             </Card>

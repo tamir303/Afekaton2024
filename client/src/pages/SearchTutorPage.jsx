@@ -91,10 +91,6 @@ const SearchTutorPage = () => {
         <Typography variant="h1">{subject} tutors</Typography>
         <Divider />
         <br />
-        <br />
-        <Link to="/profile/1">
-          <Button>Back to profile</Button>
-        </Link>
         {filteredTutors.length > 0 && (
           <SearchBar
             searchString={searchString}
@@ -144,7 +140,7 @@ const SearchTutorPage = () => {
               </CardContent>
               <CardActions>
                 <Link
-                  to={`/tutor/${tutor.userId}`}
+                  to={`/app/chat`}
                   style={{ textDecoration: "none" }}
                 >
                   <Button size="small">Chat</Button>

@@ -163,13 +163,6 @@ const ProfilePage = () => {
                       onClick={() => handleSubjectClick(subject)}
                     >
                       {subject}
-                      <IconButton
-                        size="small"
-                        color="error"
-                        onClick={() => handleRemoveSubject(subject)}
-                      >
-                        X
-                      </IconButton>
                     </Button>
                   </Grid>
                 ))}
