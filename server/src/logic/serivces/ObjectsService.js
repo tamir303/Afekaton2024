@@ -12,7 +12,8 @@ import ObjectModel from "../../models/ObjectModel.js"; // Import ObjectModel for
 import objectConverter from "../converters/ObjectBoundaryConverter.js"; // Import the objectConverter for converting object objects between different formats
 import ObjectBoundary from "../../boundaries/object/ObjectBoundary.js"; // Import ObjectBoundary for defining the structure of object objects
 import createCustomLogger from "../../config/logger.js"; // Import the configured logger for logging user-related activities
-import path from "path"; // Import path for identifying file paths, used for logging purposes
+import path from "path";
+import PostService from "./PostService.js"; // Import path for identifying file paths, used for logging purposes
 
 const { Error } = mongoose; // Import the Error class from mongoose for handling database errors
 
@@ -33,9 +34,9 @@ const objectsService = {
    * Creates a new object.
    * @async
    * @function
-   * @param {UserBoundary} reqUserBoundary - The user details to create a new user.
    * @returns {Promise<ObjectBoundary>} The created user details after saving it within the database.
    * @throws {Error} Throws an error if the user creation process encounters any issues.
+   * @param reqObjectBoundary
    */
   createObject: async (reqObjectBoundary) => {
     if (!reqObjectBoundary) {
@@ -75,43 +76,11 @@ const objectsService = {
       throw new createHttpError.NotFound("User not found");
     }
 
-    if (!reqObjectBoundary.active && existingUser.role === Roles.PARTICIPANT) {
-      logger.warn(
-        `User with userId ${
-          reqObjectBoundary.createdBy.userId.email +
-          "$" +
-          reqObjectBoundary.createdBy.userId.platform
-        } tried to create inactive object`
-      );
-      throw new createHttpError.Forbidden(
-        `The user ${existingUser.username} does not allowed to create this kind of objects`
-      );
+    if (reqObjectBoundary.active && existingUser.role === Roles.STUDENT && reqObjectBoundary.type === "Post") {
+      await PostService.informRelatedProducers(reqObjectBoundary)
     }
 
-    return objectModel
-      .validate()
-      .then(async () => {
-        await objectModel.save();
-        logger.info(
-          `The user ${
-            reqObjectBoundary.createdBy.userId.email +
-            "$" +
-            reqObjectBoundary.createdBy.userId.platform
-          } successfully created an object`
-        );
-      })
-      .catch((error) => {
-        if (error instanceof Error.ValidationError) {
-          logger.error(
-            `Invalid input, some of the fields for creating new object are missing`
-          );
-          throw new createHttpError.BadRequest(
-            "Invalid input, some of the fields for creating new object are missing"
-          );
-        }
-        throw error;
-      })
-      .then(() => objectConverter.toBoundary(objectModel));
+    return objectModel.save()
   },
   /**
    * Updates an object.

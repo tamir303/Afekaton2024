@@ -34,7 +34,7 @@ class UserBoundary {
 
     /**
      * The username of the user.
-     * @type {string}
+     * @type {Object}
      */
     this.userDetails = userDetails;
   }
