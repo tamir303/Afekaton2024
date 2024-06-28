@@ -283,34 +283,8 @@ const userService = {
    * @returns {Promise<UserModel[]>} An array of user models.
    * @throws {Error} Throws an error if the request encounters any issues.
    */
-  getAllUsers: async (userEmail, userPlatform) => {
-    const existingUserModel = await UserModel.findOne({
-      userId: userEmail + "$" + userPlatform,
-    });
-
-    if (!existingUserModel) {
-      logger.error(
-        `User with userId ${userEmail + "$" + userPlatform} does not exists`
-      );
-      throw new createHttpError.NotFound("User does not exists");
-    }
-
-    if (existingUserModel.role && existingUserModel.role === Roles.ADMIN) {
-      const usersArr = await UserModel.find();
-      logger.info(
-        `User with userId ${existingUserModel.userId} successfully retrieved all users`
-      );
-      return usersArr;
-    } else {
-      logger.error(
-        `User with userId ${
-          userEmail + "$" + userPlatform
-        } tried to retrieve all users without while he is not authorized`
-      );
-      throw new createHttpError.Forbidden(
-        "You are not allowed to make this request"
-      );
-    }
+  getAllUsers: async ()  => {
+      return UserModel.find();
   },
   /**
    * Deletes all users (only accessible to Admins).

@@ -23,42 +23,12 @@ const ObjectSchema = new mongoose.Schema(
       required: true,
     },
     /**
-     * The alias of the object boundary.
-     * @type {String}
-     */
-    alias: {
-      type: String,
-      required: true,
-    },
-    /**
      * Whether the object boundary is active.
      * @type {Boolean}
      */
     active: {
       type: Boolean,
       required: true,
-    },
-    /**
-     * The location of the object boundary.
-     * @type {Location}
-     */
-    location: {
-      /**
-       * The latitude of the object.
-       * @type {Number}
-       */
-      lat: {
-        type: Number,
-        required: true,
-      },
-      /**
-       * The longtitude of the object.
-       * @type {Number}
-       */
-      lng: {
-        type: Number,
-        required: true,
-      },
     },
     /**
      * A reference to the user who created the object boundary.
