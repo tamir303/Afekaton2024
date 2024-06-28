@@ -1,9 +1,11 @@
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
+import HomePage from "./pages/HomePage";
 import { Routes, Route } from "react-router-dom";
 import SearchTutorPage from "./pages/SearchTutorPage";
 import SearchStudentPage from "./pages/SearchStudentPage";
+import PostPage from "./pages/PostPage";
 import { useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme/theme";
@@ -11,7 +13,6 @@ import { useSelector } from "react-redux";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/common/Navbar";
 import LoginPage from "./pages/LoginPage";
-import SignupPrep from "./components/common/SignupPrep";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -21,8 +22,18 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
+<<<<<<< HEAD
+        <Route path="/home" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register/:role/:type" element={<SignupPrep />} />
+||||||| 0222278
+        <Route path="/home" element={<HomePage />} />
+        {/* <Route path="/login" element={<div>Login</div>} /> */}
+        {/* <Route path="/register/:role/:type" element={<SignupPrep />} /> */}
+=======
+        {/* <Route path="/login" element={<div>Login</div>} /> */}
+        {/* <Route path="/register/:role/:type" element={<SignupPrep />} /> */}
+>>>>>>> client/general
         <Route path="/tutors/:subject" element={<SearchTutorPage />} />
         <Route path="/students/:subject" element={<SearchStudentPage />} />
         <Route path="profile/:id" element={<ProfilePage/>} />
