@@ -11,10 +11,14 @@ import {
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import { useLocation } from "react-router-dom";
-import PostPage from "./PostPage";  
+import PostPage from "./PostPage";
+import { useParams } from "react-router-dom";
+import { userStudent, userTutor } from "../user"; // Ensure this path matches the location of your user object
 
 const SearchTutorPage = () => {
   const location = useLocation();
+  const { id } = useParams();
+  const user = id === "dor@gmail.com" ? userTutor : userStudent; // Adjust this line as necessary
   const subject = location.state.subject;
   const [searchString, setSearchString] = useState("");
   const [tutors] = useState([
@@ -100,7 +104,7 @@ const SearchTutorPage = () => {
         {filteredTutors.length === 0 && (
           <>
             <Typography variant="h5">No tutors found</Typography>
-            <PostPage />
+            <PostPage user={user} />
           </>
         )}
       </Grid>
@@ -125,8 +129,8 @@ const SearchTutorPage = () => {
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   {tutor.role === "student" || tutor.role === "studentOver80"
-                    ? "Cost 1 token"
-                    : "Price X $"}
+                    ? `Cost ${Math.floor(Math.random() * 10)+1} token`
+                    : `Price ${Math.floor(Math.random() * 30)+1} $`}{" "}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Subjects:

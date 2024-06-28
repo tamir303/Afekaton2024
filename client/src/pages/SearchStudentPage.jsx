@@ -16,21 +16,8 @@ const SearchStudentPage = () => {
   const location = useLocation();
   const subject = location.state.subject;
   const [searchString, setSearchString] = useState("");
-  const [students] = useState([
-    {
-      userId: "1",
-      role: "student",
-      userDetails: { subjects: ["Physics", "Math"], typeRole: "" },
-      username: "matan",
-    },
-    {
-        userId: "2",
-        role: "student",
-        userDetails: { subjects: ["Physics"], typeRole: "" },
-        username: "shoval",
-        },
-    // Add more tutors as needed to fill the 3x3 grid
-  ]);
+  const {userTutor, userStudent} = require("../user");
+  const [students] = useState([userTutor, userStudent]);
 
   const filteredStudents = students.filter(
     (student) =>

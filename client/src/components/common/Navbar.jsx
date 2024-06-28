@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logedOut } from "../../states/reducer"; // Adjust the import path
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,7 +18,6 @@ const pages = ["Home", "About", "Contact Us"];
 const settings = ["Logout"];
 
 function Navbar() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);

@@ -19,38 +19,17 @@ import { useParams } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import StarIcon from "@mui/icons-material/Star";
-import {userStudent, userTutor} from "../user"; // Ensure this path matches the location of your user object
+import { userStudent, userTutor } from "../user"; // Ensure this path matches the location of your user object
+import posts from "../post"; // Ensure this path matches the location of your posts object
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
   const user = id === "dor@gmail.com" ? userTutor : userStudent; // Adjust this line as necessary
   const [editableSubjects, setEditableSubjects] = useState(
     user.userDetails.subjects
   );
   const [randomGreenButtons, setRandomGreenButtons] = useState([]);
-  const globPosts = [
-    {
-      subject: "Math",
-      description: "Need help with calculus",
-      location: "Tel Aviv, Israel",
-    },
-    {
-      subject: "Physics",
-      description: "Need help with quantum mechanics",
-      location: "New York, USA",
-    },
-    {
-      subject: "Chemistry",
-      description: "Need help with organic chemistry",
-      location: "Los Angeles, USA",
-    },
-    {
-      subject: "Biology",
-      description: "Need help with genetics",
-      location: "London, UK",
-    },
-  ];
 
   useEffect(() => {
     const getRandomIndices = (arr, n) => {
@@ -117,7 +96,6 @@ const ProfilePage = () => {
               </Box>
             )}
           </Grid>
-          {user.role === "student" && (
             <Grid item xs={12}>
               <input
                 type="file"
@@ -134,7 +112,6 @@ const ProfilePage = () => {
                 Upload Document
               </Button>
             </Grid>
-          )}
         </Grid>
       </Paper>
 
@@ -259,44 +236,47 @@ const ProfilePage = () => {
               ))}
             </List>
           </Paper>
-          <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
-            <Typography variant="h5">Global Posts</Typography>
-            <List>
-              {globPosts.map((post, index) => (
-                <ListItem key={index} alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar>
-                      <StarIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={post.subject}
-                    secondary={
-                      <>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          {post.description}
-                        </Typography>
-                        <br />
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          {post.location}
-                        </Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-              ))}
-            </List>
-          </Paper>
         </>
       )}
+      <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
+        <Typography variant="h5">Global Posts</Typography>
+        <List>
+          {posts.map((post, index) => (
+            <ListItem key={index} alignItems="flex-start">
+              <ListItemAvatar>
+                <Avatar>
+                  <StarIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={post.subject}
+                secondary={
+                  <>
+                  <Typography component="span" variant="body2" color="text.secondary">
+                      Email: {post.id}
+                    </Typography><br />
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      color="text.primary"
+                    >
+                      {post.description}
+                    </Typography>
+                    <br />
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      {post.location}
+                    </Typography>
+                  </>
+                }
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
     </Container>
   );
 };

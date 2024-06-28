@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { Grid, Typography, TextField, Button, Divider, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import posts from "../post"; // Import posts from post.js
 
 const PostPage = () => {
     const [subject, setSubject] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const subjects = ['Physics', 'Math', 'Chemistry', 'Biology', 'Computer Science']; // Example list of subjects
-    const myPosts = []; // Example list of posts
     const navigate = useNavigate(); // Initialize useNavigate
 
     const handleChangeSubject = (event) => {
@@ -27,11 +27,11 @@ const PostPage = () => {
         console.log({ subject, title, content }); // Example action: log form data to console
 
         //TODO: axios call to post data to server
-        myPosts.push({ subject, title, content }); // Example action: add new post to myPosts
+        posts.push({ subject, title, content }); // Example action: add new post to myPosts
 
-        console.log(myPosts);
+        console.log(posts);
 
-        navigate('/home/posts'); // Redirect to posts page
+        navigate('/profile/1'); // Redirect to posts page
     };
 
     return (
