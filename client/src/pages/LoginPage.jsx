@@ -8,7 +8,6 @@ import {
   useTheme,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const LoginPage = () => {
   const { palette } = useTheme();
@@ -18,27 +17,15 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_DEV_URL}/login`,
-        {
-          email,
-          password,
-        }
-      );
+    const validEmails = ["dor@gmail.com", "matan@gmail.com", "omer@gmail.com"];
+    const validPassword = "1234";
 
-      if (response.data) {
-        console.log(
-          `The user ${response.data.email} has logged in successfully!`
-        );
-        navigate("/dashboard");
-      } else {
-        setError("Invalid email or password");
-      }
-    } catch (error) {
-      console.error("Error logging in:", error);
+    if (validEmails.includes(email) && password === validPassword) {
+      console.log(`The user ${email} has logged in successfully!`);
+      navigate(`/profile/${email}`);
+    } else {
       setError("Invalid email or password");
     }
   };
