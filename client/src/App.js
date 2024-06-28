@@ -12,6 +12,8 @@ import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/common/Navbar";
 import LoginPage from "./pages/LoginPage";
 import SignupPrep from "./components/common/SignupPrep";
+import ContactUsPage from "./pages/ContactUsPage";
+import AboutPage from "./pages/AboutPage";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -21,6 +23,8 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
+        <Route path="/about" element={<AboutPage/>} />
+        <Route path="/contact-us" element={<ContactUsPage/>} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register/:role/:type" element={<SignupPrep />} />
         <Route path="/tutors/:subject" element={<SearchTutorPage />} />
