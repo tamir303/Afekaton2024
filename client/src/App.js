@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/common/Navbar";
 import { Navigate } from "react-router";
-// import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/LoginPage";
 // import SignupPrep from "./components/common/SignupPrep";
 
 function App() {
@@ -22,10 +22,12 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
+        <Route path="/login/:role/:type" element={<LoginPage />} />
+        {/* <Route path="/register/:role/:type" element={<SignupPrep />} /> */}
         <Route path="/tutors/:subject" element={<SearchTutorPage />} />
         <Route path="/students/:subject" element={<SearchStudentPage />} />
         <Route path="profile/:id" element={<ProfilePage/>} />
-        <Route path="*" element={<Navigate to="profile/1" />} />
+        {/* <Route path="*" element={<Navigate to="profile/1" />} /> */}
       </Routes>
     </ThemeProvider>
   );

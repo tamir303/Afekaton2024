@@ -13,10 +13,12 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
+  ListItemSecondaryAction
 } from "@mui/material";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import StarIcon from "@mui/icons-material/Star";
+
 import EditIcon from "@mui/icons-material/Edit";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import StarIcon from '@mui/icons-material/Star';
 import user from "../user"; // Ensure this path matches the location of your user object
 
 const ProfilePage = () => {
@@ -81,6 +83,14 @@ const ProfilePage = () => {
     if (newSubject) {
       setEditableSubjects((prevSubjects) => [...prevSubjects, newSubject]);
     }
+  };
+
+  const handleAccept = (id) => {
+    console.log("Accepted request with ID:", id);
+  };
+
+  const handleDecline = (id) => {
+    console.log("Declined request with ID:", id);
   };
 
   const handleRemoveSubject = (subjectToRemove) => {
@@ -190,45 +200,49 @@ const ProfilePage = () => {
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
             <Typography variant="h5">Requests</Typography>
             <List>
-              {user.userDetails.requests.map((req, index) => (
-                <ListItem key={index} alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar>
-                      <StarIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={req.subject}
-                    secondary={
-                      <>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          Name: {user.username}
-                        </Typography>
-                        <br />
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          {req.description}
-                        </Typography>
-                        <br />
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          {req.location}
-                        </Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-              ))}
+            {user.userDetails.requests.map((req, index) => (
+  <ListItem key={index} alignItems="flex-start">
+    <ListItemAvatar>
+      <Avatar>
+        <StarIcon />
+      </Avatar>
+    </ListItemAvatar>
+    <ListItemText
+      primary={req.subject}
+      secondary={
+        <>
+          <Typography
+            component="span"
+            variant="body2"
+            color="text.secondary"
+          >
+            Name: {user.username}
+          </Typography>
+          <br />
+          <Typography
+            component="span"
+            variant="body2"
+            color="text.primary"
+          >
+            {req.description}
+          </Typography>
+          <br />
+          <Typography
+            component="span"
+            variant="body2"
+            color="text.secondary"
+          >
+            {req.location}
+          </Typography>
+        </>
+      }
+    />
+    <ListItemSecondaryAction>
+      <Button color="primary" size="small" onClick={() => handleAccept(req.id)}>Accept</Button>
+      <Button color="secondary" size="small" onClick={() => handleDecline(req.id)}>Decline</Button>
+    </ListItemSecondaryAction>
+  </ListItem>
+))}
             </List>
           </Paper>
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>

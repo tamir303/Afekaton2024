@@ -72,7 +72,7 @@ function Navbar() {
 
   const handleUserMenuClick = (setting) => {
     if (setting === "Logout") {
-      dispatch(logedOut());
+      navigate("/login/student/regular");
     } else if (setting === "Profile") {
       navigate(`/profile/${user.userId}`);
     }
