@@ -10,7 +10,13 @@ import {
   IconButton,
 } from "@mui/material";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+import {
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import user from "../user"; // Ensure this path matches the location of your user object
 
@@ -44,6 +50,7 @@ const ProfilePage = () => {
           <Grid item xs={12} style={{ position: "relative" }}>
             <Typography variant="h4">{user.username}</Typography>
             <Typography variant="body1">{user.email}</Typography>
+            <Typography variant="body1">Role: {user.role}</Typography>
             {user.role === "student" && (
               <Box style={{ position: "absolute", top: 0, right: 0 }}>
                 <IconButton color="primary">
@@ -52,22 +59,24 @@ const ProfilePage = () => {
               </Box>
             )}
           </Grid>
-          <Grid item xs={12}>
-            <input
-              type="file"
-              id="file-input"
-              style={{ display: "none" }}
-              onChange={handleFileChange}
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              component="span"
-              onClick={() => document.getElementById("file-input").click()}
-            >
-              Upload Document
-            </Button>
-          </Grid>
+          {user.role === "student" && (
+            <Grid item xs={12}>
+              <input
+                type="file"
+                id="file-input"
+                style={{ display: "none" }}
+                onChange={handleFileChange}
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                component="span"
+                onClick={() => document.getElementById("file-input").click()}
+              >
+                Upload Document
+              </Button>
+            </Grid>
+          )}
         </Grid>
       </Paper>
 
@@ -100,6 +109,7 @@ const ProfilePage = () => {
                 {user.userDetails.subjects.map((subject, index) => (
                   <Grid item key={index}>
                     <Button
+                    disabled
                       variant="contained"
                       color="primary"
                       style={{ minWidth: "100px", minHeight: "100px" }}
@@ -126,6 +136,14 @@ const ProfilePage = () => {
                     primary={req.subject}
                     secondary={
                       <>
+                        <Typography
+                          component="span"
+                          variant="body2"
+                          color="text.secondary"
+                        >
+                          Name: {user.username}
+                        </Typography>
+                        <br />
                         <Typography
                           component="span"
                           variant="body2"

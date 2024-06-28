@@ -1,7 +1,7 @@
 const user = {
   userId: "1",
-  username: "Name",
-  email: "mail@domain.com",
+  username: "Dror",
+  email: "dror@domain.com",
   role: "tutor", // Example role, adjust as necessary
   userDetails: {
     subjects: ["Math", "Physics", "Chemistry","Biology"],

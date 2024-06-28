@@ -1,11 +1,9 @@
 import "./App.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
-import HomePage from "./pages/HomePage";
 import { Routes, Route } from "react-router-dom";
 import SearchTutorPage from "./pages/SearchTutorPage";
 import SearchStudentPage from "./pages/SearchStudentPage";
-import PostPage from "./pages/PostPage";
 import { useMemo } from "react";
 import { createTheme } from "@mui/material/styles";
 import { themeSettings } from "./theme/theme";
