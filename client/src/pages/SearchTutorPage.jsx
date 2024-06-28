@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import { useLocation } from "react-router-dom";
-import PostPage from "./PostPage";
+import PostPage from "./PostPage";  
 
 const SearchTutorPage = () => {
   const location = useLocation();

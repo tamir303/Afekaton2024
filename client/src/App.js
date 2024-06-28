@@ -10,8 +10,9 @@ import { themeSettings } from "./theme/theme";
 import { useSelector } from "react-redux";
 import ProfilePage from "./pages/ProfilePage";
 import Navbar from "./components/common/Navbar";
-import LoginPage from "./pages/LoginPage";
-import SignupPrep from "./components/common/SignupPrep";
+import { Navigate } from "react-router";
+// import LoginPage from "./pages/LoginPage";
+// import SignupPrep from "./components/common/SignupPrep";
 
 function App() {
   const mode = useSelector((state) => state.mode);
@@ -21,12 +22,10 @@ function App() {
       <CssBaseline />
       <Navbar />
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register/:role/:type" element={<SignupPrep />} />
         <Route path="/tutors/:subject" element={<SearchTutorPage />} />
         <Route path="/students/:subject" element={<SearchStudentPage />} />
         <Route path="profile/:id" element={<ProfilePage/>} />
-        <Route path="*" element={<div>404</div>} />
+        <Route path="*" element={<Navigate to="profile/1" />} />
       </Routes>
     </ThemeProvider>
   );

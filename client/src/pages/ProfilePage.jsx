@@ -31,6 +31,21 @@ const ProfilePage = () => {
       description: "Need help with calculus",
       location: "Tel Aviv, Israel",
     },
+    {
+      subject: "Physics",
+      description: "Need help with quantum mechanics",
+      location: "New York, USA",
+    },
+    {
+      subject: "Chemistry",
+      description: "Need help with organic chemistry",
+      location: "Los Angeles, USA",
+    },
+    {
+      subject: "Biology",
+      description: "Need help with genetics",
+      location: "London, UK",
+    },
   ];
 
   useEffect(() => {
