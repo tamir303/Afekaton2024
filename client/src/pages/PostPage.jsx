@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import { Grid, Typography, TextField, Button, Divider, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const CreatePostPage = ({ myPosts, subjects }) => {
+const PostPage = () => {
     const [subject, setSubject] = useState('');
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const subjects = ['Physics', 'Math', 'Chemistry', 'Biology', 'Computer Science']; // Example list of subjects
+    const myPosts = []; // Example list of posts
     const navigate = useNavigate(); // Initialize useNavigate
 
     const handleChangeSubject = (event) => {
@@ -29,7 +31,7 @@ const CreatePostPage = ({ myPosts, subjects }) => {
 
         console.log(myPosts);
 
-        navigate('/home/student'); // Redirect to posts page
+        navigate('/home/posts'); // Redirect to posts page
     };
 
     return (
@@ -41,7 +43,7 @@ const CreatePostPage = ({ myPosts, subjects }) => {
                 alignItems="center"
             >
                 <Grid item>
-                    <Typography variant="h1">Create a Post</Typography>
+                    <Typography variant="h1">create a Post</Typography>
                     <Divider />
                     <br />
                     <br />
@@ -88,4 +90,4 @@ const CreatePostPage = ({ myPosts, subjects }) => {
     );
 };
 
-export default CreatePostPage;
+export default PostPage;

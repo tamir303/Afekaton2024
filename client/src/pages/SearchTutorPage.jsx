@@ -11,6 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import SearchBar from "../components/SearchBar";
 import { useLocation } from "react-router-dom";
+import PostPage from "./PostPage";
 
 const SearchTutorPage = () => {
   const location = useLocation();
@@ -87,13 +88,21 @@ const SearchTutorPage = () => {
         <Divider />
         <br />
         <br />
-        <Link to="/profile/1" style={{ textDecoration: "none" }}>
+        <Link to="/profile/1">
           <Button>Back to profile</Button>
         </Link>
-        <SearchBar
-          searchString={searchString}
-          setSearchString={setSearchString}
-        />
+        {filteredTutors.length > 0 && (
+          <SearchBar
+            searchString={searchString}
+            setSearchString={setSearchString}
+          />
+        )}
+        {filteredTutors.length === 0 && (
+          <>
+            <Typography variant="h5">No tutors found</Typography>
+            <PostPage />
+          </>
+        )}
       </Grid>
       <Grid item container justifyContent="center" spacing={3}>
         {filteredTutors.map((tutor) => (
@@ -109,13 +118,16 @@ const SearchTutorPage = () => {
               <CardContent>
                 <Typography variant="h5" component="div">
                   {tutor.username}
-                </Typography><br/>
+                </Typography>
+                <br />
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Role: {tutor.role}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  { tutor.role === "smartupStudent" || tutor.role === "studentOver80" ? "Cost 1 token" : "Price X $" }
-                  </Typography>
+                  {tutor.role === "student" || tutor.role === "studentOver80"
+                    ? "Cost 1 token"
+                    : "Price X $"}
+                </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                   Subjects:
                 </Typography>
