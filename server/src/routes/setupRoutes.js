@@ -2,6 +2,7 @@
 import entryRoutes from "./entry.js";
 import authRoutes from "./auth.js";
 import participantRoutes from "./participants.js";
+import subjectsRoutes from "./subjects.js";
 
 /**
  * Mounts routes to the Express application.
@@ -12,4 +13,5 @@ export function mountRoutes(app) {
   app.use("/auth", authRoutes);
   app.use("/entry", entryRoutes);
   app.use("/participants", participantRoutes);
+  app.use("/subjects", subjectsRoutes);
 }
