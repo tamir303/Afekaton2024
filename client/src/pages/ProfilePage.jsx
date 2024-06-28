@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, {useEffect} from "react";
+=======
+import React, { useState, useEffect } from "react";
+>>>>>>> 3dbb991b54bee7914f2dc92045c38d2551bd1b39
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -8,19 +12,26 @@ import {
   Button,
   Box,
   IconButton,
-} from "@mui/material";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import {
   Avatar,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
 } from "@mui/material";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import StarIcon from "@mui/icons-material/Star";
+<<<<<<< HEAD
+=======
+import EditIcon from "@mui/icons-material/Edit";
+import user from "../user"; // Ensure this path matches the location of your user object
+>>>>>>> 3dbb991b54bee7914f2dc92045c38d2551bd1b39
 
 const ProfilePage = ({user}) => {
   const navigate = useNavigate();
+  const [editableSubjects, setEditableSubjects] = useState(
+    user.userDetails.subjects
+  );
+  const [randomGreenButtons, setRandomGreenButtons] = useState([]);
   const globPosts = [
     {
       subject: "Math",
@@ -28,6 +39,21 @@ const ProfilePage = ({user}) => {
       location: "Tel Aviv, Israel",
     },
   ];
+
+  useEffect(() => {
+    const getRandomIndices = (arr, n) => {
+      const indices = [];
+      while (indices.length < n) {
+        const randomIndex = Math.floor(Math.random() * arr.length);
+        if (!indices.includes(randomIndex)) {
+          indices.push(randomIndex);
+        }
+      }
+      return indices;
+    };
+
+    setRandomGreenButtons(getRandomIndices(user.userDetails.subjects, 3));
+  }, []);
 
   const handleSubjectClick = (subject) => {
     if (user.role === "student") {
@@ -42,9 +68,24 @@ const ProfilePage = ({user}) => {
     console.log(file);
   };
 
+<<<<<<< HEAD
   useEffect(() => {
     console.log(user)
   }, [user]);
+=======
+  const handleEditSubjects = () => {
+    const newSubject = prompt("Enter a new subject to add:");
+    if (newSubject) {
+      setEditableSubjects((prevSubjects) => [...prevSubjects, newSubject]);
+    }
+  };
+
+  const handleRemoveSubject = (subjectToRemove) => {
+    setEditableSubjects((prevSubjects) =>
+      prevSubjects.filter((subject) => subject !== subjectToRemove)
+    );
+  };
+>>>>>>> 3dbb991b54bee7914f2dc92045c38d2551bd1b39
 
   return (
     <Container>
@@ -106,9 +147,19 @@ const ProfilePage = ({user}) => {
       ) : (
         <>
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
-            <Typography variant="h5">Subjects I Can Teach</Typography>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Typography variant="h5">Subjects I Can Teach</Typography>
+              <IconButton color="primary" onClick={handleEditSubjects}>
+                <EditIcon />
+              </IconButton>
+            </Box>
             <Box mt={2}>
               <Grid container spacing={2}>
+<<<<<<< HEAD
                 {/*{user.userDetails.subjects.map((subject, index) => (*/}
                 {/*  <Grid item key={index}>*/}
                 {/*    <Button*/}
@@ -122,6 +173,31 @@ const ProfilePage = ({user}) => {
                 {/*    </Button>*/}
                 {/*  </Grid>*/}
                 {/*))}*/}
+=======
+                {editableSubjects.map((subject, index) => (
+                  <Grid item key={index}>
+                    <Button
+                      variant="contained"
+                      color={
+                        randomGreenButtons.includes(index)
+                          ? "success"
+                          : "primary"
+                      }
+                      style={{ minWidth: "100px", minHeight: "100px" }}
+                      onClick={() => handleSubjectClick(subject)}
+                    >
+                      {subject}
+                      <IconButton
+                        size="small"
+                        color="error"
+                        onClick={() => handleRemoveSubject(subject)}
+                      >
+                        X
+                      </IconButton>
+                    </Button>
+                  </Grid>
+                ))}
+>>>>>>> 3dbb991b54bee7914f2dc92045c38d2551bd1b39
               </Grid>
             </Box>
           </Paper>
