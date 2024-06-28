@@ -25,6 +25,7 @@ const LoginPage = () => {
     if (validEmails.includes(email) && password === validPassword) {
       console.log(`The user ${email} has logged in successfully!`);
       navigate(`/profile/${email}`);
+      
     } else {
       setError("Invalid email or password");
     }

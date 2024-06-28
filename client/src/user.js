@@ -1,21 +1,51 @@
-const user = {
+export const userStudent = {
   userId: "1",
-  username: "Dror",
-  email: "dror@domain.com",
-  role: "tutor", // Example role, adjust as necessary
+  username: "Omer",
+  email: "omer@gmail.com",
+  role: "student", // Example role, adjust as necessary
   userDetails: {
     subjects: ["Math", "Physics", "Chemistry","Biology"],
-    typeRole: "above80",
+    typeRole: "Reserved",
     posts: [
       {
         id: "1",
         title: "Post Title",
-        description: "Post Description",
         subject: "Math",
-        location: "Location",
-        price: "Price",
-        date: "Date",
+        description: "Post Description",
       },
+    ],
+    requests: [
+    ],
+  },
+};
+
+export const userTutor = {
+  userId: "2",
+  username: "Dor",
+  email: "dor@gmail.com",
+  role: "tutor", // Example role, adjust as necessary
+  userDetails: {
+    subjects: ["Math", "Physics","Biology"],
+    typeRole: "Reserved",
+    posts: [
+      {
+        id: "1",
+        title: "Post Title",
+        subject: "Math",
+        description: "Post Description",
+      },
+      {
+        id: "2",
+        title: "Post Title",
+        subject: "Physics",
+        description: "Post Description",
+      },
+      {
+        id: "3",
+        title: "Post Title",
+        subject: "Biology",
+        description: "Post Description",
+      }
     ],
     requests: [
       {
@@ -57,5 +87,3 @@ const user = {
     ],
   },
 };
-
-export default user;
