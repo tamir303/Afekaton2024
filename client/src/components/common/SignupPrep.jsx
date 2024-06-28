@@ -3,7 +3,8 @@ import createValidationSchema from "../../utils/formValidation"; // Adjust the p
 import SignupPage from "../../pages/SignupPage";
 import axios from "axios";
 import userRoles from "../../utils/userRoles";
-import { useNavigate, useParams } from "react-router-dom"; // Import useParams
+import { useNavigate, useParams } from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 const SignupPrep = () => {
   const { type } = useParams(); // Retrieve the 'type' parameter from the route
@@ -11,9 +12,7 @@ const SignupPrep = () => {
   const navigate = useNavigate();
   let fields = [];
   let validation = {};
-  let onSubmit = (values) => {
-    throw new Error("Function not implemented.");
-  };
+  let onSubmit;
 
   const backendUrl = process.env.REACT_APP_BACKEND_DEV_URL;
 
@@ -32,10 +31,10 @@ const SignupPrep = () => {
     case userRoles.OVER_EIGHTY:
     case userRoles.EXTERNAL:
     case userRoles.SMARTUP_STUDENT:
-      fields = ["Email", "Username", "Password", "Confirm Password", "Fields that I can help with"];
+      fields = ["Email", "Username", "Password", "Confirm Password", "Subjects"];
       break;
     case userRoles.REGULAR:
-      fields = ["Email", "Username", "Password", "Fields that I need help with"];
+      fields = ["Email", "Username", "Password", "Subjects"];
       break;
     default:
       console.log("Not matching");
@@ -45,36 +44,12 @@ const SignupPrep = () => {
   const platform = "Builder";
 
   onSubmit = async (values) => {
-    const myObj = {}; // Defining the type of the object
+    const userDetails = {"password": values.password, "subjects": [values.Subjects]}; // Defining the type of the object
+    console.log({platform: "Afektive",username: values.Username, email: values.Email, role, userDetails})
+    const res = await axios.post(backendUrl + "/entry/register", {platform: "Afektive",username: values.Username, email: values.Email, role, userDetails})
 
-    for (const value in values) {
-      if (value.toLowerCase().includes("password")) {
-        continue; // The backend API needs the password within userDetails property
-      }
-      myObj[value.toLowerCase()] = values[value];
-    }
-
-    // Additional properties based on the selected role
-    myObj["role"] = role;
-    myObj["platform"] = platform;
-    myObj["userDetails"] = { password: values.Password };
-
-    try {
-      const savedUserResponse = await axios.post(
-        `${backendUrl}/entry/register`,
-        myObj
-      );
-
-      const savedUser = await savedUserResponse.data;
-
-      if (savedUser) {
-        console.log(
-          `The user ${savedUser.email} has been registered successfully!`
-        );
-      }
-      navigate(`/login/${role}`);
-    } catch (error) {
-      console.error(`Encountered error for Registering ${type}:`, error);
+    if (res.status === 201) {
+      navigate(`/profile/${values.Email}`);
     }
   };
 

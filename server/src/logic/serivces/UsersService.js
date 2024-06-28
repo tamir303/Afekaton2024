@@ -40,11 +40,11 @@ const userService = {
    * @throws {Error} Throws an error if the user creation process encounters any issues.
    */
   createUser: async (reqUserBoundary) => {
+    console.log(reqUserBoundary)
     if (
       !reqUserBoundary.userId.email ||
       !reqUserBoundary.userId.platform ||
       !reqUserBoundary.role ||
-      !reqUserBoundary.username ||
       !reqUserBoundary.userDetails
     ) {
       logger.error(`A user tried to signup with illeagal credentials`);
@@ -81,24 +81,6 @@ const userService = {
     const userModel = userConverter.toModel(reqUserBoundary);
 
     return userModel
-      .validate()
-      .then(async () => {
-        /*In case the user is an Admin or Researcher the client will send thier password within the UserDetails */
-        if (userModel.role !== Roles.PARTICIPANT) {
-          const salt = await bcrypt.genSalt();
-          if (!userModel.userDetails.hasOwnProperty("password")) {
-            logger.error(
-              `User with role ${userModel.role} did not attach password for encryption`
-            );
-            throw new Error.ValidationError();
-          }
-          userModel.userDetails.password = await bcrypt.hash(
-            userModel.userDetails.password,
-            salt
-          );
-          logger.info(`Encrypted the user [${userModel.userId}] password`);
-        }
-      })
       .then(() => {
         userModel.save();
         logger.info(
@@ -127,6 +109,7 @@ const userService = {
    * @throws {Error} Throws an error if the login process encounters any issues.
    */
   login: async (reqUserBoundary) => {
+    console.log(reqUserBoundary)
     if (
       !reqUserBoundary.userId.email ||
       !reqUserBoundary.userId.platform ||
@@ -171,54 +154,7 @@ const userService = {
       throw new createHttpError.NotFound("User does not exists");
     }
 
-    if (
-      existingUserModel.role &&
-      existingUserModel.role !== Roles.PARTICIPANT
-    ) {
-      let isMatch = false;
-      if (reqUserBoundary.userDetails && reqUserBoundary.userDetails.password)
-        isMatch = await bcrypt.compare(
-          reqUserBoundary.userDetails.password,
-          existingUserModel.userDetails.password
-        );
-      else {
-        logger.error(
-          `User with userId ${existingUserModel.userId} has entered invalid credentials, missing password`
-        );
-        throw new createHttpError.BadRequest(
-          "Invalid credentials, missing password"
-        );
-      }
-
-      if (!isMatch) {
-        logger.warn(
-          `User with userId ${existingUserModel.userId} has entered invalid password`
-        );
-        throw new createHttpError.BadRequest("Invalid credentials");
-      }
-
-      const token = jwt.sign(
-        { id: existingUserModel._id },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRATION }
-      );
-      const userBoundary = userConverter.toBoundary(existingUserModel);
-      const date = Date.now();
-      const expirationTime =
-        parseInt(process.env.JWT_EXPIRATION) * 24 * 60 * 60 * 1000; // Time in day * 24 hours * 60 minutes * 60 secones * 1000 millseconds
-
-      const expiryStr = dayjs(new Date(date + expirationTime));
-      userBoundary.userDetails.expiryStr = expiryStr;
-      logger.info(
-        `User with userId ${existingUserModel.userId} successfully signed in into the system`
-      );
-      return {
-        jwtToken: token,
-        body: userBoundary,
-        expirationCookie: new Date(date + expirationTime), // Adding the number of days to current date
-      };
-    }
-    return { body: userConverter.toBoundary(existingUserModel) };
+    return userConverter.toBoundary(existingUserModel)
   },
   /**
    * Updates a user's information.

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -18,9 +18,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import user from "../user"; // Ensure this path matches the location of your user object
 
-const ProfilePage = () => {
+const ProfilePage = ({user}) => {
   const navigate = useNavigate();
   const globPosts = [
     {
@@ -42,6 +41,10 @@ const ProfilePage = () => {
     const file = event.target.files[0];
     console.log(file);
   };
+
+  useEffect(() => {
+    console.log(user)
+  }, [user]);
 
   return (
     <Container>
@@ -85,7 +88,7 @@ const ProfilePage = () => {
           <Typography variant="h5">Subjects I Need Help With</Typography>
           <Box mt={2}>
             <Grid container spacing={2}>
-              {user.userDetails.subjects.map((subject, index) => (
+              {user?.userDetails?.subjects.map((subject, index) => (
                 <Grid item key={index}>
                   <Button
                     variant="contained"
@@ -106,64 +109,64 @@ const ProfilePage = () => {
             <Typography variant="h5">Subjects I Can Teach</Typography>
             <Box mt={2}>
               <Grid container spacing={2}>
-                {user.userDetails.subjects.map((subject, index) => (
-                  <Grid item key={index}>
-                    <Button
-                    disabled
-                      variant="contained"
-                      color="primary"
-                      style={{ minWidth: "100px", minHeight: "100px" }}
-                      onClick={() => handleSubjectClick(subject)}
-                    >
-                      {subject}
-                    </Button>
-                  </Grid>
-                ))}
+                {/*{user.userDetails.subjects.map((subject, index) => (*/}
+                {/*  <Grid item key={index}>*/}
+                {/*    <Button*/}
+                {/*    disabled*/}
+                {/*      variant="contained"*/}
+                {/*      color="primary"*/}
+                {/*      style={{ minWidth: "100px", minHeight: "100px" }}*/}
+                {/*      onClick={() => handleSubjectClick(subject)}*/}
+                {/*    >*/}
+                {/*      {subject}*/}
+                {/*    </Button>*/}
+                {/*  </Grid>*/}
+                {/*))}*/}
               </Grid>
             </Box>
           </Paper>
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>
             <Typography variant="h5">Requests</Typography>
             <List>
-              {user.userDetails.requests.map((req, index) => (
-                <ListItem key={index} alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar>
-                      <StarIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={req.subject}
-                    secondary={
-                      <>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          Name: {user.username}
-                        </Typography>
-                        <br />
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.primary"
-                        >
-                          {req.description}
-                        </Typography>
-                        <br />
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="text.secondary"
-                        >
-                          {req.location}
-                        </Typography>
-                      </>
-                    }
-                  />
-                </ListItem>
-              ))}
+              {/*{user.userDetails.requests.map((req, index) => (*/}
+              {/*  <ListItem key={index} alignItems="flex-start">*/}
+              {/*    <ListItemAvatar>*/}
+              {/*      <Avatar>*/}
+              {/*        <StarIcon />*/}
+              {/*      </Avatar>*/}
+              {/*    </ListItemAvatar>*/}
+              {/*    <ListItemText*/}
+              {/*      primary={req.subject}*/}
+              {/*      secondary={*/}
+              {/*        <>*/}
+              {/*          <Typography*/}
+              {/*            component="span"*/}
+              {/*            variant="body2"*/}
+              {/*            color="text.secondary"*/}
+              {/*          >*/}
+              {/*            Name: {user.username}*/}
+              {/*          </Typography>*/}
+              {/*          <br />*/}
+              {/*          <Typography*/}
+              {/*            component="span"*/}
+              {/*            variant="body2"*/}
+              {/*            color="text.primary"*/}
+              {/*          >*/}
+              {/*            {req.description}*/}
+              {/*          </Typography>*/}
+              {/*          <br />*/}
+              {/*          <Typography*/}
+              {/*            component="span"*/}
+              {/*            variant="body2"*/}
+              {/*            color="text.secondary"*/}
+              {/*          >*/}
+              {/*            {req.location}*/}
+              {/*          </Typography>*/}
+              {/*        </>*/}
+              {/*      }*/}
+              {/*    />*/}
+              {/*  </ListItem>*/}
+              {/*))}*/}
             </List>
           </Paper>
           <Paper elevation={3} style={{ padding: "20px", margin: "20px 0" }}>

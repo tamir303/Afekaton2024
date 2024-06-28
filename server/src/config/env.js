@@ -30,7 +30,7 @@ logger.info("Loading environment variables");
  * Defaults to 6001 if not specified in the environment variables.
  * @type {number}
  */
-export const PORT = process.env.PORT || 6001;
+export const PORT = 3000;
 
 // Log the port number being used by the server
 logger.info(`Server Port: ${PORT}`);
